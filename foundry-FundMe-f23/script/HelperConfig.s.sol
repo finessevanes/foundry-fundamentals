@@ -12,6 +12,9 @@ contract HelperConfig is Script {
 
     NetworkConfig public activeNetworkConfig;
 
+    uint8 public constant DECIMALS = 8;
+    int256 public constant INITIAL_PRICE = 2000e8;
+
     constructor() {
         if (block.chainid == 11155111) {
             activeNetworkConfig = getSepoliaEthConfig();
@@ -36,7 +39,7 @@ contract HelperConfig is Script {
         //setup later
 
         vm.startBroadcast();
-        MockV3Aggregator mock = new MockV3Aggregator(8, 2000e8);
+        MockV3Aggregator mock = new MockV3Aggregator(DECIMALS, INITIAL_PRICE);
         vm.stopBroadcast();
 
         NetworkConfig memory anvilConfig = NetworkConfig({priceFeed: address(mock)});
