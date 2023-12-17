@@ -78,12 +78,7 @@ contract FundMe {
      * Getter Functions
      */
 
-    /**
-     * @notice Gets the amount that an address has funded
-     *  @param fundingAddress the address of the funder
-     *  @return the amount funded
-     */
-    function getAddressToAmountFunded(address fundingAddress) public view returns (uint256) {
+    function getAddressToAmountFunded(address fundingAddress) external view returns (uint256) {
         return s_addressToAmountFunded[fundingAddress];
     }
 
@@ -91,7 +86,7 @@ contract FundMe {
         return s_priceFeed.version();
     }
 
-    function getFunder(uint256 index) public view returns (address) {
+    function getFunder(uint256 index) external view returns (address) {
         return s_funders[index];
     }
 
