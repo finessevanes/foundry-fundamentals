@@ -39,8 +39,7 @@ contract HelperConfig is Script {
         if (activeNetworkConfig.priceFeed != address(0)) {
             return activeNetworkConfig;
         }
-        //setup later
-
+        
         vm.startBroadcast();
         MockV3Aggregator mock = new MockV3Aggregator(DECIMALS, INITIAL_PRICE);
         vm.stopBroadcast();

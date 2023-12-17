@@ -1,10 +1,6 @@
 // SPDX-License-Identifier: MIT
-// 1. Pragma
 pragma solidity ^0.8.19;
 // 2. Imports
-
-// import {AggregatorV3Interface} from "@chainlink-brownie-contracts/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-
 import {AggregatorV3Interface} from "@chainlink/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 import {PriceConverter} from "./PriceConverter.sol";
@@ -12,12 +8,6 @@ import {PriceConverter} from "./PriceConverter.sol";
 // 3. Interfaces, Libraries, Contracts
 error FundMe__NotOwner();
 
-/**
- * @title A sample Funding Contract
- * @author Patrick Collins
- * @notice This contract is for creating a sample funding contract
- * @dev This implements price feeds as our library
- */
 contract FundMe {
     // Type Declarations
     using PriceConverter for uint256;
@@ -53,10 +43,8 @@ contract FundMe {
         i_owner = msg.sender;
     }
 
-    /// @notice Funds our contract based on the ETH/USD price
     function fund() public payable {
         require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");
-        // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         s_addressToAmountFunded[msg.sender] += msg.value;
         s_funders.push(msg.sender);
     }
